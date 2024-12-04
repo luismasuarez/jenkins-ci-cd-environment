@@ -4,7 +4,9 @@ Este proyecto proporciona un entorno robusto para la gestión del ciclo de vida 
 
 Nginx actúa como una capa intermedia eficiente entre los usuarios y los servicios principales del proyecto, optimizando el manejo del tráfico, mejorando la seguridad y garantizando una entrega rápida del contenido. Su rol como proxy inverso y servidor web es fundamental para asegurar que el sistema funcione de manera fluida y escalable.
 
-## Crear imagen de jenkins con docker 
+## Crear imagen de jenkins con docker
+
+Al crear la imagen de docker con la configuracion actual se instalan docker y kubectl client, tambien se agrega el usuario jenkins al grupo docker del host para acceder al docker.sock; Esto permite contruir y orquestar con el host de docker desktop.
 
 - Ejectar el comando: `docker build -t jenkins-docker-in-docker:lts-jdk17 .`
 
