@@ -56,6 +56,27 @@ services:
     volumes:
       - ./postgres:/var/lib/postgresql/data
 
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus_service
+    networks:
+      jenkins:
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana_service
+    networks:
+      jenkins:
+    user: root
+    ports:
+      - "3001:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+
   nginx:
     image: nginx:latest
     container_name: nginx_service
@@ -70,12 +91,14 @@ services:
     depends_on:
       - gitea
       - jenkins
+      - grafana
+      - prometheus
 
 networks:
   jenkins:
 
 volumes:
   jenkins-data:
-  jenkins-docker-certs:
+  grafana_data:
   gitea:
    driver: local
